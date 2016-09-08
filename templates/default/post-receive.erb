@@ -1,0 +1,36 @@
+#!/bin/bash -l
+
+#The -l parameter executes the command in a login shell
+
+GIT_DIR=<%= @git_dir %>
+WORK_TREE=<%= @work_tree%>
+
+
+while read oldrev newrev ref
+do
+    if [[ $ref =~ .*/master$ ]];
+    then
+        echo "Master ref received.  Deploying master branch to production"
+        git --work-tree=$WORK_TREE --git-dir=$GIT_DIR checkout -f
+
+        # start deploy tasks
+        cd $WORK_TREE
+        echo "work tree is located at"
+        echo $WORK_TREE
+        
+        bundle install
+        #rake db:create RAILS_ENV=production
+        rake db:migrate RAILS_ENV=production
+        rake assets:precompile RAILS_ENV=production
+        #passenger-config restart-app $WORK_TREE
+        sudo service nginx restart
+
+        <%= node['railsapp']['post_receive_commands'].join("\n\t") %>
+
+        # end deploy tasks
+        
+        echo "Git post-receive deploy complete"
+    else
+        echo "Ref $ref received successfully.  No action performed: only the master branch can be deployed on this server."
+    fi
+done

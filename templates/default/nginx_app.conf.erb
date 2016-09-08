@@ -1,0 +1,18 @@
+server {
+    listen 80;
+
+    <% if node['railsapp']['server_name'].length > 0 %>
+    server_name <%= node['railsapp']['server_name'] %>;
+    <% else %>
+    server_name 127.0.0.1;
+    <% end %>
+    
+    root <%= @working_dir %>/public; # <-- be sure to point to 'public'
+    passenger_app_root <%= @working_dir %>;
+    passenger_enabled on;
+    rack_env production;
+
+    passenger_env_var SECRET_KEY_BASE <%= node['railsapp']['secret_key_base'] %>;
+    passenger_env_var <%= node['railsapp']['name'].upcase %>_DATABASE_USERNAME <%= node['db']['user']['name'] %>;
+    passenger_env_var <%= node['railsapp']['name'].upcase %>_DATABASE_PASSWORD <%= node['db']['user']['password'] %>;
+}
