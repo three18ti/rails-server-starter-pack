@@ -81,6 +81,8 @@ Include `rails-server-starter-pack`  's recipes with the following order in your
 
 Run `knife solo prepare root@YOUR_SERVER_IP` , then edit the **YOUR_SERVER_IP.json** inside **nodes** folder to include the run_list and variables. Then run `knife solo cook root@YOUR_SERVER_IP`.
 
+## Note
+The **railsapp** recipe is using a starter rails template from this repository : https://github.com/cupnoodle/derpbox .  
 
 
 ## Contributing
@@ -91,6 +93,7 @@ Run `knife solo prepare root@YOUR_SERVER_IP` , then edit the **YOUR_SERVER_IP.js
 4. Write tests for your change (if applicable)
 5. Run the tests, ensuring they all pass
 6. Submit a Pull Request using Github
+
 
 ## License and Authors
 
