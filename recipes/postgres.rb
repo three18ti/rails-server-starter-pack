@@ -11,9 +11,11 @@ execute "change postgres password" do
 end
 
 # create new postgres user
+# grant new user permission to create database
 execute "create new postgres user" do
   user "postgres"
   command "psql -c \"create user #{node['db']['user']['name']} with password '#{node['db']['user']['password']}';\""
+  command "psql -c \"alter user #{node['db']['user']['name']} CREATEDB;\""
   not_if { `sudo -u postgres psql -tAc \"SELECT * FROM pg_roles WHERE rolname='#{node['db']['user']['name']}'\" | wc -l`.chomp == "1" }
 end
 
