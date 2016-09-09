@@ -18,7 +18,9 @@ default['rvm']['gpg_key'] = '409B6B1796C275462A1703113804BB82D39DC0E3'
 
 default['passenger']['version'] = '5.0.29'
 
+# extra configuration flag used for nginx installation
 default['nginx']['extra_configure_flags'] = ''
+
 default['nginx']['worker_processes'] = '1'
 default['nginx']['worker_connections'] = '1024'
 
