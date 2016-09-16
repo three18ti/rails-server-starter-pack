@@ -7,25 +7,9 @@
 # All rights reserved - Do Not Redistribute
 #
 # update package database
-execute "update packages" do
-  command "apt-get update"
-end
 
-# install packages
-package "telnet"
-package "postfix"
-package "curl"
-package "git-core"
-package "zlib1g-dev"
-package "libssl-dev"
-package "libreadline-dev"
-package "libyaml-dev"
-package "libsqlite3-dev"
-package "sqlite3"
-package "libxml2-dev"
-package "libxslt1-dev"
-package "libpq-dev"
-package "build-essential"
-package "tree"
-package "nodejs"
-package "libcurl4-openssl-dev"
+# apt will update automatically, unnecessary to manually update.
+
+node['rails-server-starter-pack']['run_list'].each do |_title, recipe|
+  include_recipe recipe['name'] if recipe['managed']
+end

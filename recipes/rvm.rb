@@ -1,8 +1,8 @@
-# add rvm key
-#gnupg_dir       = "/home/#{node['user']['name']}/.gnupg"
-#gnupg_dir_user  = "chown -R #{node['user']['name']}:#{node['group']} #{gnupg_dir};"
-#gnupg_dir_root  = "if [ -d #{gnupg_dir} ]; then chown -R root:root #{gnupg_dir}; fi;"
-#gnupg_cmd       = "`which gpg2 || which gpg` --keyserver hkp://keys.gnupg.net --recv-keys #{node['rvm']['gpg_key']};"
+# Don't leave dead code
+
+# There is an RVM cookbook already
+# https://github.com/martinisoft/chef-rvm
+# Might want to consider using this cookbook.
 
 execute "Adding gpg key to #{node['user']['name']}" do
 

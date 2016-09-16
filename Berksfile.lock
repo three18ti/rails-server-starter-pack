@@ -1,0 +1,13 @@
+DEPENDENCIES
+  rails-server-starter-pack
+    path: .
+    metadata: true
+
+GRAPH
+  iptables (2.2.0)
+  openssh (2.0.0)
+    iptables (>= 1.0)
+  rails-server-starter-pack (0.1.0)
+    openssh (>= 0.0.0)
+    sudo (>= 0.0.0)
+  sudo (3.0.0)

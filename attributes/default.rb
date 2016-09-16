@@ -1,3 +1,41 @@
+# Run all the cookbook by default, see recipes/default.rb
+# the lefthand side of the hash is being thrown away currently,
+# we use this for logging internally and a sanity check when modifying the run list.  You could for instance do:
+# default['rails-server-starter-pack']['run_list']['sshd'] = {
+#   'name' => 'some_other_cookbook:ssh',
+#   'manage' => true
+# }
+# Also, this means you only need to add recipe[rails-server-starter-pack::default] to your run list instead of each node having a several cookbook long run list.
+default['rails-server-starter-pack']['run_list'] = {
+  'packages' => {
+    'name' => 'rails-server-starter-pack::packages',
+    'managed' => true
+  },
+  'ruby-version-manager' => {
+    'name' => 'rails-server-starter-pack::rvm',
+    'managed' => true
+  },
+  'sshd' => {
+    'name' => 'rails-server-starter-pack::ssh',
+    'managed' => true
+  },
+  'users' => {
+    'name' => 'rails-server-starter-pack::users',
+    'managed' => true
+  },
+  'install-passenger' => {
+    'name' => 'rails-server-starter-pack::passenger',
+    'managed' => 'true'
+  },
+  'install-postgres' => {
+    'name' => 'rails-server-starter-pack::postgres',
+    'managed' => true
+  },
+  'install-rails-app' => {
+    'name' => 'rails-server-starter-pack::railsapp',
+    'managed' => true
+  }
+}
 
 # the group user belongs to, and username of the user created
 default['group'] = 'deployer'

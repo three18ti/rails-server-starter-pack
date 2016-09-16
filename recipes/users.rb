@@ -2,12 +2,10 @@
 group node['group']
 
 # give group sudo privileges
-bash "give group sudo privileges" do
-  code <<-EOH
-    sed -i '/%#{node['group']}.*/d' /etc/sudoers
-    echo '%#{node['group']} ALL=(ALL) NOPASSWD:ALL ' >> /etc/sudoers
-  EOH
-  not_if "grep -xq '%#{node['group']} ALL=(ALL) NOPASSWD:ALL ' /etc/sudoers"
+# Use sudo cookbook
+# https://github.com/chef-cookbooks/sudo
+sudo node['group'] do
+  group node['group']
 end
 
 # create user
