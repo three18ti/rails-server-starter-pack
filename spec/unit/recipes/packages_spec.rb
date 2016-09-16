@@ -16,7 +16,7 @@ describe 'rails-server-starter-pack::packages' do
     it 'converges successfully' do
       expect { chef_run }.to_not raise_error
     end
-    
+
     %w(
       telnet postfix curl
       git-core zlib1g-dev libssl-dev
@@ -25,7 +25,7 @@ describe 'rails-server-starter-pack::packages' do
       build-essential tree nodejs libcurl4-openssl-dev
     ).each do |pkg|
       it "installs package #{pkg}" do
-       expect( chef_run).to install_package(pkg)
+        expect(chef_run).to install_package(pkg)
       end
     end
   end

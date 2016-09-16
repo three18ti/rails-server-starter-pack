@@ -20,15 +20,15 @@ describe 'rails-server-starter-pack::users' do
     end
 
     it 'creates group' do
-      expect( chef_run ).to create_group('foo')
+      expect(chef_run).to create_group('foo')
     end
 
     it 'sets sudo for group' do
-      expect( chef_run ).to install_sudo('foo')
+      expect(chef_run).to install_sudo('foo')
     end
 
     it 'creates user' do
-      expect( chef_run ).to create_user('bar').with(
+      expect(chef_run).to create_user('bar').with(
         'gid' => 'foo',
         'home' => '/home/bar',
         'shell' => '/bin/bash'

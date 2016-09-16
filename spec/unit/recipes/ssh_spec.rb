@@ -18,7 +18,7 @@ describe 'rails-server-starter-pack::ssh' do
     end
 
     it 'includes openssh recipe' do
-      expect( chef_run ).to include_recipe('openssh')
+      expect(chef_run).to include_recipe('openssh')
     end
   end
 end
