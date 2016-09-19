@@ -168,13 +168,17 @@ end
 #  end
 # end
 
+# This will cause nginx to restart every time chef is run.
+# Is that what you really want?
 # Restart/start nginx
-service 'nginx' do
-  action :restart
-  only_if { File.exist? '/opt/nginx/logs/nginx.pid' }
-end
+# service 'nginx' do
+#   action :restart
+#  only_if { File.exist? '/opt/nginx/logs/nginx.pid' }
+# end
 
-service 'nginx' do
-  action :start
-  not_if { File.exist? '/opt/nginx/logs/nginx.pid' }
-end
+# Service start is idempotent, Chef will determine if the service is running
+# and start it if not.  You don't need to check for a pid file.
+# You're already starting nginx in the passenger config...
+# service 'nginx' do
+#  action :start
+# end

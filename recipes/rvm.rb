@@ -8,7 +8,7 @@ execute "Adding gpg key to #{node['user']['name']}" do
   user node['user']['name']
   group node['group']
 
-  environment( 'HOME' => "/home/#{node['user']['name']}" )
+  environment('HOME' => "/home/#{node['user']['name']}")
   command "`which gpg2 || which gpg` --keyserver hkp://keys.gnupg.net --recv-keys #{node['rvm']['gpg_key']};"
 
   not_if { node['rvm']['gpg_key'].empty? }
@@ -19,7 +19,7 @@ bash 'install rvm' do
   user node['user']['name']
   group node['group']
   cwd "/home/#{node['user']['name']}"
-  environment( 'HOME' => "/home/#{node['user']['name']}" )
+  environment('HOME' => "/home/#{node['user']['name']}")
 
   code <<-EOH
     export HOME=/home/#{node['user']['name']}
@@ -39,7 +39,7 @@ bash 'install ruby and set default version of ruby' do
   user node['user']['name']
   group node['group']
   cwd "/home/#{node['user']['name']}"
-  environment( 'HOME' => "/home/#{node['user']['name']}" )
+  environment('HOME' => "/home/#{node['user']['name']}")
 
   code <<-EOH
     export HOME=/home/#{node['user']['name']}

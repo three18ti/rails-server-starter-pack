@@ -1,5 +1,7 @@
 # referenced from http://vladigleba.com/blog/2014/08/12/provisioning-a-rails-server-using-chef-part-2-writing-the-recipes/
 
+# There's a postgres cookbook https://supermarket.chef.io/cookbooks/postgresql
+
 package 'postgresql'
 package 'postgresql-contrib'
 package 'libpq-dev'
