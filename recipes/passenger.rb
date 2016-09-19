@@ -17,17 +17,18 @@ end
 bash 'Increase swap space if memory is insufficient' do
   user 'root'
 
+  # rubocop:disable Style/CaseIndentation,Lint/EndAlignment
   memory_in_megabytes = case node['os']
-
-                        when /.*bsd/
-                          node['memory']['total'].to_i / 1024 / 1024
-                        when 'linux'
-                          node['memory']['total'][/\d*/].to_i / 1024
-                        when 'darwin'
-                          node['memory']['total'][/\d*/].to_i
-                        when 'windows', 'solaris', 'hpux', 'aix'
-                          node['memory']['total'][/\d*/].to_i / 1024
+    when /.*bsd/
+      node['memory']['total'].to_i / 1024 / 1024
+    when 'linux'
+      node['memory']['total'][/\d*/].to_i / 1024
+    when 'darwin'
+      node['memory']['total'][/\d*/].to_i
+    when 'windows', 'solaris', 'hpux', 'aix'
+      node['memory']['total'][/\d*/].to_i / 1024
   end
+  # rubocop:enable Style/CaseIndentation,Lint/EndAlignment
 
   if memory_in_megabytes < 1000
     ## Do your thing!
