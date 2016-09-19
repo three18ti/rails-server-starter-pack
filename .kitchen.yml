@@ -1,0 +1,19 @@
+---
+driver:
+  name: docker
+  binary: /usr/bin/docker
+  use_sudo: false
+  dns:
+    - 8.8.8.8
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: ubuntu-14.04
+
+suites:
+  - name: default
+    run_list:
+      - recipe[rails-server-starter-pack::default]
+    attributes:

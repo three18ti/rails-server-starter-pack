@@ -1,0 +1,49 @@
+---
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: centos-6.7
+  - name: ubuntu-14.04
+
+suites:
+  - name: default
+    driver_plugin: vsphere
+    driver_config:
+      driver_options:
+        host: '<%= ENV['OS_HOST'] %>'
+        user: '<%= ENV['OS_USER'] %>'
+        password: '<%= ENV['OS_PASSWORD'] %>'
+        insecure: true
+      machine_options:
+        start_timeout: 600
+        create_timeout: 600
+        ready_timeout: 90
+        bootstrap_options:
+          use_linked_clone: true
+          datacenter: '<%= ENV['OS_DATACENTER'] %>'
+          resource_pool: '<%= ENV['OS_VM_RESOURCE_POOL'] %>'
+          template_folder: '<%= ENV['OS_TEMPLATE_FOLDER'] %>'
+          template_name: '<%= ENV['OS_TEMPLATE_NAME'] %>'
+          vm_folder: <%= ENV['OS_VM_FOLDER'] %>
+          datastore: <%= ENV['OS_VM_DATASTORE'] %>
+          num_cpus: <%= ENV['OS_VM_CPUS'] %>
+          network_name:
+            - <%= ENV['OS_VM_NETWORK_NAME'] %>
+          memory_mb: <%= ENV['OS_VM_RAM'] %>
+          ssh:
+            user: <%= ENV['OS_VM_USER'] %>
+            paranoid: false
+            password: <%= ENV['OS_VM_password'] %>
+            port: 22
+          convergence_options:
+          customization_spec:
+            domain: local
+            ipsettings:
+              dnsServerList:
+                - 8.8.8.8
+                - 8.8.4.4
+
+    run_list:
+      - recipe[rails-server-starter-pack::default]
+    attributes:
