@@ -1,10 +1,11 @@
+# This is a config file for using test kitchen with docker.
+# Install the ChefDK: https://downloads.chef.io/chef-dk/
+# run `chef gem install kitchen-docker`
+# then run `kitchen converge` to spin a docker container
+# and test your cookbook.
 ---
 driver:
   name: docker
-  binary: /usr/bin/docker
-  use_sudo: false
-  dns:
-    - 8.8.8.8
 
 provisioner:
   name: chef_zero

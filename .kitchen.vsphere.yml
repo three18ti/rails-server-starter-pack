@@ -1,3 +1,9 @@
+# This is a config file example for running Kitchen against vSphere
+# This requires an existing vsphere environment.
+# Install ChefDK: https://downloads.chef.io/chef-dk/
+# Install kitchen driver `chef gem install chef-provisoning-vsphere`
+# set your $KITCHEN_YAML env variable `export KITCHEN_VSPHERE=.kitchen.vsphere.yml
+# run `kitchen converge`
 ---
 provisioner:
   name: chef_zero
